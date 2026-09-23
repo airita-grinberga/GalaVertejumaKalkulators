@@ -133,7 +133,7 @@ public class GalvenaKlase {
 		DecimalFormat df = new DecimalFormat("0.#");
 		for(int i=0; i<studenti.length; i++) {	
 			for(int j=0; j<kriteriji.length; j++) {
-				System.out.println("Studenta "+studenti[i]+" vērtējums par kritēriju "+kriteriji[j]+" ir "+kriterijaVertejums[i][j]+", kura svars ir "+kriterijaSvars[j]);
+				System.out.println("Studenta "+studenti[i]+" vērtējums par kritēriju "+kriteriji[j]+" ir "+kriterijaVertejums[i][j]+", kura svars ir "+kriterijaSvars[j]+"%.");
 			}
 			System.out.println("Semestra vērtējums ir "+df.format(semestraVertejums[i])+" balles"
 					+ "\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
@@ -194,7 +194,7 @@ public class GalvenaKlase {
 					System.out.println("Kura kritērija vērtējumu vēlies labot (1. - "+kritSk+".)?");
 					scan.next();
 				}
-				kritI = scan.nextInt();
+				kritJ = scan.nextInt();
 			}while(kritJ < 1 || kritJ > kritSk);
 			kritJ -= 1;
 			
