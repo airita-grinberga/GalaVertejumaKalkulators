@@ -139,6 +139,45 @@ public class GalvenaKlase {
 					+ "\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
 		}
 	}
+	
+	// Kritērija labošana
+	static void LabotKriteriju() {
+		if (kriteriji != null) {
+			int kritID;
+			do {
+				System.out.println("Kuru kritēriju vēlies labot (1. - "+kritSk+".)?");
+				while(!scan.hasNextInt()) {
+					System.out.println("Kuru kritēriju vēlies labot (1. - "+kritSk+".)?");
+					scan.next();
+				}
+				kritID = scan.nextInt();
+			}while(kritID < 1 || kritID > kritSk+1);
+			kritID -= 1;
+			String krit;
+			scan.nextLine();
+			System.out.println("Jaunais kritērijs: ");
+			krit = scan.nextLine();
+			for (int i=0; i<kritSk; i++) {
+				if (i == kritID)
+					kriteriji[i] = krit;
+			}
+		} else System.out.println("Ievadi vērtēšanas kritērijus!");
+		
+	}
+	
+	// Kritēriju svara labošana
+	static void LabotKritSvaru() {
+		if (kriteriji != null) {
+			System.out.println("Jaunie vērtēšanas kritēriju svari: ");
+			VertKritSvars();
+		} else System.out.println("Ievadi vērtēšanas kritērijus!");
+		
+	}
+	
+	// Iegūtā vērtējuma labošana
+	static void LabotVertejumu() {
+		
+	}
 	public static void main(String[] args) {
 		char izv;
 		do {
@@ -148,7 +187,7 @@ public class GalvenaKlase {
 					+ "3 - Ievadīt kritēriju svaru\n" 
 					+ "4 - Ievadīt vērtējumus\n"
 					+ "5 - Labot kritēriju\n"
-					+ "6 - Labot kritērija svaru\n"
+					+ "6 - Labot kritēriju svaru\n"
 					+ "7 - Labot iegūto vērtējumu\n"
 					+ "8 - Aprēķināt gala vērtējumu\n"
 					+ "9 - Saglabāt rezultātus failā\n"
@@ -164,9 +203,9 @@ public class GalvenaKlase {
 			case '2': VertesanasKriteriji(); break;
 			case '3': VertKritSvars(); break;
 			case '4': VertejumuIevade(); break;
-			case '5': ; break;
-			case '6': ; break;
-			case '7': ; break;
+			case '5': LabotKriteriju(); break;
+			case '6': LabotKritSvaru(); break;
+			case '7': LabotVertejumu(); break;
 			case '8': GalaVertAprekins(); break;
 			case '9': FailuApstradesKlase.SaglabatFaila(studSk, studenti, semestraVertejums);; break;
 			case '0': FailuApstradesKlase.NolasitNoFaila();; break;
@@ -176,7 +215,6 @@ public class GalvenaKlase {
 			}
 		} while (izv != 'x');
 		
-
 		scan.close();
 	}
 }
