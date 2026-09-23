@@ -159,8 +159,8 @@ public class GalvenaKlase {
 			case '6': ; break;
 			case '7': ; break;
 			case '8': GalaVertAprekins(); break;
-			case '9': ; break;
-			case '0': ; break;
+			case '9': FailuApstradesKlase.SaglabatFaila(studSk, studenti, semestraVertejums);; break;
+			case '0': FailuApstradesKlase.NolasitNoFaila();; break;
 			case 'x' :System.out.println("Programma apturēta!"); break;
 			default: System.out.println("Darbība nepastāv!");
 				
