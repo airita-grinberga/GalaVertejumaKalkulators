@@ -4,12 +4,17 @@ import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class GalvenaKlase {
-	public static void main(String[] args) {
-		int studSk, kritSk;
-		Scanner scan = new Scanner(System.in);
-		DecimalFormat df = new DecimalFormat("0.#");
-		
-		// Audzēkņu skaita ievade
+	static Scanner scan = new Scanner(System.in);
+	static int studSk = 0, kritSk = 0;
+	static String[] studenti = null;
+	static String[] kriteriji = null;
+	static int[] kriterijaSvars = null;
+	static int[][] kriterijaVertejums = null;
+	static double[] semestraVertejums = null;
+	
+
+	// Audzēkņu ievade
+	static void SkolenuSaraksts () {
 		do {
 			System.out.println("Cik studentiem aprēķināsi gala vērtējumu?");
 			while(!scan.hasNextInt()) {
@@ -18,9 +23,20 @@ public class GalvenaKlase {
 			}
 			studSk = scan.nextInt();
 		}while(studSk<1);
-		String[] studenti = new String[studSk];
+		studenti = new String[studSk]; 
 		
-		// Vērtēšanas kritēriju skaita ievade
+		scan.nextLine();
+		// Ievada audzēkņu vārdus, uzvārdus
+		for(int i=0; i<studenti.length; i++) {
+			do {
+				System.out.println("Ievadi "+(i+1)+". studentu");
+				studenti[i] = scan.nextLine().trim();
+			} while(!studenti[i].matches("^[\\p{L} ]+$"));
+		}
+	}
+	
+	// Vērtēšanas kritēriju ievade
+	static void VertesanasKriteriji() {
 		do {
 			System.out.println("Kāds būs kritēriju skaits?");
 			while(!scan.hasNextInt()) {
@@ -29,30 +45,28 @@ public class GalvenaKlase {
 			}
 			kritSk = scan.nextInt();
 		}while(kritSk<1);
-		String[] kriteriji = new String[kritSk];
-		int[] kriterijaSvars = new int[kritSk];
-		int[][] kriterijaVertejums = new int[studSk][kritSk];
-		double[] semestraVertejums = new double[studSk];
+		
+		kriteriji = new String[kritSk];
+		//kriterijaSvars = new int[kritSk];
+		//int[][] kriterijaVertejums = new int[studSk][kritSk];
+		//double[] semestraVertejums = new double[studSk];
 		
 		scan.nextLine();
-		
-		// Ievada audzēkņu vārdus, uzvārdus
-		for(int i=0; i<studenti.length; i++) {
-			do {
-				System.out.println("Ievadi "+(i+1)+". studentu");
-				studenti[i] = scan.nextLine().trim();
-			} while(!studenti[i].matches("^[\\p{L} ]+$"));
-		}
-		
 		// Definē kritērijus
-		int maxSvars = 100, sk = 1;
-		double atlSvars;
 		for(int i=0; i<kriteriji.length; i++) {
 			do {
 				System.out.println("Ievadi "+(i+1)+". kritēriju");
 				kriteriji[i] = scan.nextLine().trim();
 			} while(!kriteriji[i].matches("^[\\p{L} ]+$"));
-			
+		}
+	}
+	
+	// Vērtēšanas kritēriju svara ievade
+	static void VertKritSvars() {
+		int maxSvars = 100, sk = 1;
+		double atlSvars;
+		
+		for(int i=0; i<kriteriji.length; i++) {
 			// Norāda katra kritērija svaru
 			do {
 				System.out.println("Ievadi "+(i+1)+". kritērija svaru (max: "+maxSvars+")");
@@ -73,7 +87,10 @@ public class GalvenaKlase {
 			sk++;
 			scan.nextLine();
 		}
-		
+	}
+	
+	// Vērtējumu ievade
+	static void VertejumuIevade() {
 		// Norāda vērtējumu kādu ieguvis katrs audzēknis par katru kritēriju
 		for(int i=0; i<kriterijaVertejums.length; i++) {
 			for(int j=0; j<kriterijaVertejums[i].length; j++) {
@@ -87,8 +104,10 @@ public class GalvenaKlase {
 				}while(kriterijaVertejums[i][j]<0 || kriterijaVertejums[i][j]>10);
 			}
 		}
-		
-		// Gala vērtējuma aprēķināšana
+	}
+	
+	// Gala vērtējuma aprēķināšana
+	static void GalaVertAprekins() {
 		double rezultats;
 		for(int i=0; i<studenti.length; i++) {
 			rezultats=0;
@@ -97,8 +116,11 @@ public class GalvenaKlase {
 			}
 			semestraVertejums[i] = rezultats;
 		}
-		
-		// Gala vērtējumu izvadīšana
+	}
+	
+	// Gala vērtējumu izvade
+	static void GalaVertIzvade() {
+		DecimalFormat df = new DecimalFormat("0.#");
 		for(int i=0; i<studenti.length; i++) {	
 			for(int j=0; j<kriteriji.length; j++) {
 				System.out.println("Studenta "+studenti[i]+" vērtējums par kritēriju "+kriteriji[j]+" ir "+kriterijaVertejums[i][j]+", kura svars ir "+kriterijaSvars[j]);
@@ -106,6 +128,11 @@ public class GalvenaKlase {
 			System.out.println("Semestra vērtējums ir "+df.format(semestraVertejums[i])+" balles"
 					+ "\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
 		}
+	}
+	public static void main(String[] args) {
+		
+		
+
 		scan.close();
 	}
 }
