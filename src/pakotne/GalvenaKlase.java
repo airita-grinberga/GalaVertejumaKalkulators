@@ -47,9 +47,9 @@ public class GalvenaKlase {
 		}while(kritSk<1);
 		
 		kriteriji = new String[kritSk];
-		//kriterijaSvars = new int[kritSk];
-		//int[][] kriterijaVertejums = new int[studSk][kritSk];
-		//double[] semestraVertejums = new double[studSk];
+		kriterijaSvars = new int[kritSk];
+		kriterijaVertejums = new int[studSk][kritSk];
+		semestraVertejums = new double[studSk];
 		
 		scan.nextLine();
 		// Definē kritērijus
@@ -116,6 +116,7 @@ public class GalvenaKlase {
 			}
 			semestraVertejums[i] = rezultats;
 		}
+		GalaVertIzvade();
 	}
 	
 	// Gala vērtējumu izvade
@@ -130,7 +131,41 @@ public class GalvenaKlase {
 		}
 	}
 	public static void main(String[] args) {
-		
+		char izv;
+		do {
+			System.out.println("\nPieejamās darbības:\n" 
+					+ "1 - Ievadīt audzēkņus\n" 
+					+ "2 - Ievadīt kritērijus\n"
+					+ "3 - Ievadīt kritēriju svaru\n" 
+					+ "4 - Ievadīt vērtējumus\n"
+					+ "5 - Labot kritēriju\n"
+					+ "6 - Labot kritērija svaru\n"
+					+ "7 - Labot iegūto vērtējumu\n"
+					+ "8 - Aprēķināt gala vērtējumu\n"
+					+ "9 - Saglabāt rezultātus failā\n"
+					+ "0 - Nolasīt rezultātus no faila\n"
+					+ "x - Apturēt programmu\n");
+					
+			System.out.print("Tava izvēle: ");
+			izv = scan.next().charAt(0);
+			izv = Character.toLowerCase(izv);
+			
+			switch(izv) {
+			case '1': SkolenuSaraksts(); break;
+			case '2': VertesanasKriteriji(); break;
+			case '3': VertKritSvars(); break;
+			case '4': VertejumuIevade(); break;
+			case '5': ; break;
+			case '6': ; break;
+			case '7': ; break;
+			case '8': GalaVertAprekins(); break;
+			case '9': ; break;
+			case '0': ; break;
+			case 'x' :System.out.println("Programma apturēta!"); break;
+			default: System.out.println("Darbība nepastāv!");
+				
+			}
+		} while (izv != 'x');
 		
 
 		scan.close();
