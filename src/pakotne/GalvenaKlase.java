@@ -151,7 +151,7 @@ public class GalvenaKlase {
 					scan.next();
 				}
 				kritID = scan.nextInt();
-			}while(kritID < 1 || kritID > kritSk+1);
+			}while(kritID < 1 || kritID > kritSk);
 			kritID -= 1;
 			String krit;
 			scan.nextLine();
@@ -176,7 +176,45 @@ public class GalvenaKlase {
 	
 	// Iegūtā vērtējuma labošana
 	static void LabotVertejumu() {
-		
+		if (kriterijaVertejums != null) {
+			int kritI, kritJ = 0;
+			do {
+				System.out.println("Kura studenta vērtējumu vēlies labot (1. - "+studSk+".)?");
+				while(!scan.hasNextInt()) {
+					System.out.println("Kura studenta vērtējumu vēlies labot (1. - "+studSk+".)?");
+					scan.next();
+				}
+				kritI = scan.nextInt();
+			}while(kritI < 1 || kritI > studSk);
+			kritI -= 1;
+			
+			do {
+				System.out.println("Kura kritērija vērtējumu vēlies labot (1. - "+kritSk+".)?");
+				while(!scan.hasNextInt()) {
+					System.out.println("Kura kritērija vērtējumu vēlies labot (1. - "+kritSk+".)?");
+					scan.next();
+				}
+				kritI = scan.nextInt();
+			}while(kritJ < 1 || kritJ > kritSk);
+			kritJ -= 1;
+			
+			int vert;
+			do {
+				System.out.println("Jaunais vērtējums:");
+				while(!scan.hasNextInt()) {
+					System.out.println("Jaunais vērtējums: ");
+					scan.next();
+				}
+				vert = scan.nextInt();
+			}while(vert < 1 || vert > 10);
+	
+			for (int i=0; i<studSk; i++) {
+				for (int j=0; j<kritSk; j++) {
+					if(i == kritI && j == kritJ)
+						kriterijaVertejums[i][j] = vert;
+				}
+			}
+		} else System.out.println("Ievadi vērtējumus par katru kritēriju!");
 	}
 	public static void main(String[] args) {
 		char izv;
